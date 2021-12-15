@@ -11,6 +11,19 @@ on:
   workflow_dispatch:
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Lint codebase
+        uses: github/super-linter@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILTER_REGEX_EXCLUDE: .devcontainer
+
   test:
     runs-on: ubuntu-latest
 
@@ -25,6 +38,7 @@ jobs:
         run: |
           code=0
           for day in day-*/; do
+            [ ! -d "$day" ] && continue
             received=$(runghc "$day/Main.hs" <"$day/example/input.txt")
             expected=$(cat "$day/example/output.txt")
             if [ "$received" != "$expected" ]; then
@@ -42,6 +56,7 @@ jobs:
         run: |
           code=0
           for day in day-*/; do
+            [ ! -d "$day" ] && continue
             received=$(runghc "$day/Main.hs" <"$day/puzzle/input.txt")
             expected=$(cat "$day/puzzle/output.txt")
             if [ "$received" != "$expected" ]; then
