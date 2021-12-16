@@ -18,7 +18,13 @@
 
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
-    "haskell.haskell"
+    "DavidAnson.vscode-markdownlint",
+    "EditorConfig.EditorConfig",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "haskell.haskell",
+    "hoovercj.haskell-linter",
+    "timonwong.shellcheck"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
