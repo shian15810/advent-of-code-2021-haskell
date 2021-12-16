@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+[ $# -eq 0 ] && exit 1
+[ $# -gt 2 ] && exit 1
+
+day=$1
+[ ! -d "$day" ] && exit 1
+
+input=$2
+if [ $# -eq 2 ]; then
+  [ "$input" != 'example' ] && [ "$input" != 'puzzle' ] && exit 1
+else
+  input=puzzle
+fi
+
+runghc "$day/Main.hs" <"$day/$input/input.txt"
